@@ -1,5 +1,5 @@
 const helpers = require("../helpers/index.js");
-const idHelper = require("../helpers/id.js");
+const { getMealDataAsObject } = require("./id.js");
 const { forEach } = require("p-iteration");
 
 module.exports = async ctx => {
@@ -17,7 +17,7 @@ module.exports = async ctx => {
             str: element[1],
             regexp: /<li>\s*<a href="javascript:void\(0\);" onclick="fnDetail\('(\d+)'\);"><span class="ico_schFood"><\/span>(.+?)<\/a>\s*<\/li>\s*/g
         }), async (element, index, array) => {
-            tmpObject[element[1]] = await idHelper(ctx, parseInt(element[0]));
+            tmpObject[element[1]] = await getMealDataAsObject(ctx, parseInt(element[0]));
         });
 
         if(Object.getOwnPropertyNames(tmpObject) != 0) {
