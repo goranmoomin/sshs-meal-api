@@ -1,5 +1,5 @@
 {
-    "name": "sshs-api",
+    "name": "sshs-meal-api",
     "version": "0.0.0",
     "description": "",
     "main": "app/index.js",
