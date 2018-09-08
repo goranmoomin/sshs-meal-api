@@ -1,12 +1,12 @@
 
 const helpers = require("../helpers/index.js");
 const { instanceMethods } = require("p-iteration");
+const fetch = require("node-fetch");
 
 Object.assign(Array.prototype, instanceMethods);
 
 const getMealDataAsObject = async (ctx, id) => {
-    const dom = await ctx.JSDOM.fromURL("http://sshs.hs.kr/75054/subMenu.do/dggb/module/mlsv/selectMlsvDetailPopup.do?mlsvId=" + id);
-    const data = dom.serialize();
+    const data = await (await fetch("http://sshs.hs.kr/75054/subMenu.do/dggb/module/mlsv/selectMlsvDetailPopup.do?mlsvId=" + id)).text();
 
     let dataFromHTMLAsArray = helpers.getRegexCaptureAsArray({
         str: data,
@@ -23,8 +23,8 @@ const getMealDataAsObject = async (ctx, id) => {
 
 
 module.exports = async ctx => {
-    const dom = await ctx.JSDOM.fromURL("http://sshs.hs.kr/75054/subMenu.do");
-    const data = dom.window.document.querySelector("tbody").outerHTML;
+    const html = await (await fetch("http://sshs.hs.kr/75054/subMenu.do")).text();
+    const data = /<tbody>([^]+?)<\/tbody>/g.exec(html)[1];
 
     ctx.message = (await helpers.getRegexCaptureAsArray({
         str: data,
