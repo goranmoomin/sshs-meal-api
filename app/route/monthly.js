@@ -33,7 +33,7 @@ module.exports = async ctx => {
         date: parseInt(element[0]),
         menu: await helpers.getRegexCaptureAsArray({
             str: element[1],
-            regexp: /<li>\s*<a href="javascript:void\(0\);" onclick="fnDetail\('(\d+)'\);"><span class="ico_schFood"><\/span>(.+?)<\/a>\s*<\/li>\s*/g
+            regexp: /<li>[^]*?onclick="fnDetail\('(\d+)'\);"[^]*?<span class="ico_schFood"><\/span>([^]+?)<\/a>\s*<\/li>/g
         }).asyncMap(async (element, index, array) => await getMealDataAsObject(ctx, parseInt(element[0]))) 
     }))).filter(element => element.menu.length != 0);
 };
