@@ -26,6 +26,14 @@ module.exports = async ctx => {
     const html = await (await fetch("http://sshs.hs.kr/75054/subMenu.do")).text();
     const data = /<tbody>([^]+?)<\/tbody>/g.exec(html)[1];
 
+    console.log(helpers.getRegexCaptureAsArray({
+        str: data,
+        regexp: /<td.*?>\s*(\d+)\s*<ul>\s*([^]*?)\s*<\/ul><\/td>/g
+    }).map(element => helpers.getRegexCaptureAsArray({
+        str: element[1],
+        regexp: /<li>[^]*?onclick="fnDetail\('(\d+)'\);"[^]*?<span class="ico_schFood"><\/span>([^]+?)<\/a>\s*<\/li>/g
+    })));
+
     ctx.message = (await helpers.getRegexCaptureAsArray({
         str: data,
         regexp: /<td.*?>\s*(\d+)\s*<ul>\s*([^]*?)\s*<\/ul><\/td>/g
@@ -33,7 +41,7 @@ module.exports = async ctx => {
         date: parseInt(element[0]),
         menu: await helpers.getRegexCaptureAsArray({
             str: element[1],
-            regexp: /<li>\s*<a href="javascript:void\(0\);" onclick="fnDetail\('(\d+)'\);"><span class="ico_schFood"><\/span>(.+?)<\/a>\s*<\/li>\s*/g
+            regexp: /<li>[^]*?onclick="fnDetail\('(\d+)'\);"[^]*?<span class="ico_schFood"><\/span>([^]+?)<\/a>\s*<\/li>/g
         }).asyncMap(async (element, index, array) => await getMealDataAsObject(ctx, parseInt(element[0]))) 
     }))).filter(element => element.menu.length != 0);
 };
