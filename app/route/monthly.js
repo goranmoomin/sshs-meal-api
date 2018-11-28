@@ -28,7 +28,7 @@ module.exports = async ctx => {
 
     ctx.message = (await helpers.getRegexCaptureAsArray({
         str: data,
-        regexp: /<td.*?>\s*(\d+)\s*<ul>\s*([^]*?)\s*<\/ul><\/td>/g
+        regexp: /<td.*?>\s*(\d+)\s*<ul>\s*([^]*?)\s*<\/ul>\s*<\/td>/g
     }).asyncMap(async (element, index, array) => ({
         date: parseInt(element[0]),
         menu: await helpers.getRegexCaptureAsArray({
