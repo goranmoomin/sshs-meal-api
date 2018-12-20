@@ -1,4 +1,3 @@
-const helpers = require("../helpers/index.js");
 const { instanceMethods } = require("p-iteration");
 const fetch = require("node-fetch");
 const cheerio = require("cheerio");
@@ -7,15 +6,12 @@ Object.assign(Array.prototype, instanceMethods);
 
 const getMealDataAsObject = async id => {
     const data = await (await fetch("http://sshs.hs.kr/75054/subMenu.do/dggb/module/mlsv/selectMlsvDetailPopup.do?mlsvId=" + id)).text();
-
-    let dataFromHTMLAsArray = helpers.getRegexCaptureAsArray({
-        str: data,
-        regexp: /<td class="ta_l">\s*([^\s]+[^<>]*[^\s]+)\s*<\/td>/g
-    }).reduce((acc, val) => acc.concat(val), []);
+    const $ = cheerio.load(data);
+    const dataFromHTMLAsArray = $("table > tbody > tr > td.ta_l").contents().toArray().filter(node => node.type === "text").map(node => node.data.trim()).filter(str => str);
 
     return {
         type: dataFromHTMLAsArray[2],
-        menu: dataFromHTMLAsArray[3].replace(/&amp;/g, "&").split(","),
+        menu: dataFromHTMLAsArray[3].split(","),
         calories: dataFromHTMLAsArray[4]
     };
 };
