@@ -4,7 +4,7 @@ const router = require("./route/index.js");
 const cors = require("koa-cors");
 
 const app = new Koa();
-const PORT = 8080;
+const PORT = process.env.PORT || 8000;
 
 app.use(responseTime()).use(cors()).use(async (ctx, next) => {
     await next();
