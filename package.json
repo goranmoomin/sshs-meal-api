@@ -10,17 +10,17 @@
     "author": "Sungbin Jo",
     "license": "ISC",
     "devDependencies": {
-        "chai": "^4.1.2",
-        "chai-http": "^4.0.0",
+        "chai": "^4.2.0",
+        "chai-http": "^4.2.1",
         "mocha": "^5.2.0"
     },
     "dependencies": {
         "cheerio": "^1.0.0-rc.2",
-        "koa": "^2.5.2",
+        "koa": "^2.7.0",
         "koa-cors": "0.0.16",
-        "koa-response-time": "^2.0.0",
+        "koa-response-time": "^2.1.0",
         "koa-router": "^7.4.0",
-        "node-fetch": "^2.2.0",
+        "node-fetch": "^2.3.0",
         "p-iteration": "^1.1.7"
     }
 }
