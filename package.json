@@ -1,26 +1,6 @@
 {
-    "name": "sshs-meal-api",
-    "version": "0.0.0",
-    "description": "",
-    "main": "app/index.js",
-    "scripts": {
-        "start": "node ./app/index.js",
-        "test": "./node_modules/mocha/bin/_mocha ./test/**/*.test.js"
-    },
-    "author": "Sungbin Jo",
-    "license": "ISC",
-    "devDependencies": {
-        "chai": "^4.2.0",
-        "chai-http": "^4.2.1",
-        "mocha": "^5.2.0"
-    },
-    "dependencies": {
-        "cheerio": "^1.0.0-rc.2",
-        "koa": "^2.7.0",
-        "koa-cors": "0.0.16",
-        "koa-response-time": "^2.1.0",
-        "koa-router": "^7.4.0",
-        "node-fetch": "^2.3.0",
-        "p-iteration": "^1.1.7"
-    }
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "node-fetch": "^2.6.0"
+  }
 }

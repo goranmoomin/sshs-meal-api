@@ -1,33 +1,38 @@
 # SSHS Meal API
+
+This is a microservice that returns the meal menu of SSHS.
+It's based on [Vercel](https://vercel.com) (although I like the `now` naming better).
+
 ## Initial setup
 
 Clone this repository: 
 
-``` shell
-git clone https://github.com/pcr910303/sshs-meal-api
-cd sshs-meal-api
+``` shellsession
+$ git clone https://github.com/pcr910303/sshs-meal-api.git
+$ cd sshs-meal-api
 ```
 
 and install all dependencies:
 
-``` shell
-npm i
+``` shellsession
+$ yarn
 ```
 
-Start server:
+Start the development server:
 
-``` shell
-node ./app/index.js
+``` shellsession
+$ now dev
 ```
 
-[The API](http://localhost:8080) runs on port 8080 of localhost.
+[The API](http://localhost:3000) will run on port 3000 of localhost.
 
 ## Deploying
 
-This API is designed to run on [now](https://zeit.co). To deploy to now, first install [now](https://zeit.co). Then, ...
+[Vercel](https://vercel.com) makes deploying very easy.
+It's just one command:
 
-``` shell
-now
+``` shellsession
+$ now
 ```
 
-That's the only command to deploy to now! Thanks zeit :heart:!
+I deploy this to https://sshs-meal-api.pcr910303.vercel.app, you might want to use the API.
