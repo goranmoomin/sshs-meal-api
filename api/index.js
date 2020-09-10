@@ -32,9 +32,14 @@ module.exports = async (req, res) => {
             }
         }
         data[date] = {};
-        if (morning) { data[date].morning = morning.trimEnd(); }
-        if (lunch) { data[date].lunch = lunch.trimEnd(); }
-        if (dinner) { data[date].dinner = dinner.trimEnd(); }
+        function cleanString(string) {
+            string = string.trimEnd();
+            string = string.replace(/\([^)]*\)/g, "");
+            return string;
+        }
+        if (morning) { data[date].morning = cleanString(morning); }
+        if (lunch) { data[date].lunch = cleanString(lunch); }
+        if (dinner) { data[date].dinner = cleanString(dinner); }
     }
     res.json(data);
 };
